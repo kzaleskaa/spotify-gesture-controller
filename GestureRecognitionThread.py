@@ -1,12 +1,12 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
-import typing
+
 from typing import Type
 
 import cv2
 import mediapipe as mp
 import numpy as np
-from PyQt5.QtCore import Qt, pyqtSignal, QThread, QObject
+from PyQt5.QtCore import Qt, pyqtSignal, QThread
 from PyQt5.QtGui import QImage
 from keras.models import load_model
 from mediapipe.python.solutions.holistic import Holistic
@@ -21,7 +21,6 @@ class GestureRecognitionThread(QThread):
         """HandDetectionModel constructor.
 
         Args:
-            parent(typing.Optional[QObject]): pass
             model_name (str): file name to load the model
         """
         super().__init__()

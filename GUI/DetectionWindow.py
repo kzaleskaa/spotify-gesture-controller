@@ -1,5 +1,6 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
+
 from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QDialog

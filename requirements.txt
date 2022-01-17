@@ -105,6 +105,9 @@ pycparser=2.21=pyhd8ed1ab_0
 pygments=2.10.0=pyhd8ed1ab_0
 pyparsing=3.0.6=pyhd8ed1ab_0
 pyqt=5.9.2=py39hd77b12b_6
+pyqt5=5.15.6=pypi_0
+pyqt5-qt5=5.15.2=pypi_0
+pyqt5-sip=12.9.0=pypi_0
 pyrsistent=0.18.0=py39hb82d6ee_0
 python=3.9.7=h6244533_1
 python-dateutil=2.8.2=pyhd8ed1ab_0
@@ -157,3 +160,13 @@ zeromq=4.3.4=h0e60522_1
 zipp=3.6.0=pyhd8ed1ab_0
 zlib=1.2.11=h62dcd97_4
 zstd=1.4.9=h19a0ad4_0
+
+pyqt5~=5.15.6
+opencv-python~=4.5.4.60
+mediapipe~=0.8.9
+numpy~=1.21.4
+keras~=2.7.0
+scikit-learn~=1.0.1
+tensorflow~=2.7.0
+requests~=2.26.0
+spotipy~=2.19.0
