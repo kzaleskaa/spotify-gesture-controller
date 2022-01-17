@@ -1,40 +1,38 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
+from threading import Thread
 
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QDialog
 
-from Connection import Connection
+from GestureRecognition import GestureRecognition
+from queue import Queue
 from pyui.DetectionWindow import Ui_DetectionWindow
 
 
 class DetectionWindow(QDialog, Ui_DetectionWindow):
     """The class represents detection window of GUI."""
-
     def __init__(self):
         """DetectionWindow constructor"""
         super().__init__()
-        self.token = ""
         self.setupUi(self)
-        self.connection = Connection(self)
+        self.token = ""
         self._connect_buttons()
+        self.queue = Queue()
+        self.detection = GestureRecognition()
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""
         self.pushButton_2.clicked.connect(self.connection_action)
 
     def connection_action(self) -> None:
-        self.connection.change_gesture_name.connect(self.update_gesture_name)
-        self.connection.change_confidence.connect(self.update_confidence)
-        self.connection.change_image.connect(self.update_image)
-        self.connection.token = self.token
-        self.connection.started.connect(self.connection.start_detection)
-        self.connection.start()
-
-    def destroy_thread(self):
-        self.connection.quit()
-        self.connection = None
+        self.detection.change_image.connect(self.update_image)
+        self.detection.change_confidence.connect(self.update_confidence)
+        self.detection.change_gesture_name.connect(self.update_gesture_name)
+        self.detection.add_gesture.connect(self.add_gesture)
+        self.detection.token = self.token
+        self.detection.start()
 
     @pyqtSlot(str)
     def update_confidence(self, confidence: str) -> None:
@@ -62,3 +60,7 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
             image (QImage): converted frame from camera
         """
         self.detection_camera.setPixmap(QPixmap.fromImage(image))
+
+    @pyqtSlot(str)
+    def add_gesture(self, gesture_name: str) -> None:
+        self.q.put(gesture_name)

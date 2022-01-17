@@ -89,12 +89,12 @@ class Ui_DetectionWindow(object):
         self.detection_confidence.setText(_translate("DetectionWindow", "<html><head/><body><p><br/></p></body></html>"))
         self.pushButton_2.setText(_translate("DetectionWindow", "START"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    DetectionWindow = QtWidgets.QDialog()
-    ui = Ui_DetectionWindow()
-    ui.setupUi(DetectionWindow)
-    DetectionWindow.show()
-    sys.exit(app.exec_())
+#
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     DetectionWindow = QtWidgets.QDialog()
+#     ui = Ui_DetectionWindow()
+#     ui.setupUi(DetectionWindow)
+#     DetectionWindow.show()
+#     sys.exit(app.exec_())

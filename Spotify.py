@@ -18,6 +18,7 @@ class SpotifyAPI:
             token (str): represents the authorization
             redirect_uri (str): after user approves, where do we send them back to?
         """
+        super(SpotifyAPI, self).__init__()
         self.client_id = client_id
         self.client_secret = client_secret
         self.redirect_uri = redirect_uri
@@ -50,7 +51,6 @@ class SpotifyAPI:
             return info
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def skip_to_previous(self) -> None:
         """Function skip to previous track"""
@@ -59,7 +59,6 @@ class SpotifyAPI:
             requests.post(endpoint, headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music or restart app...")
 
     def skip_to_next(self) -> None:
         """Function skip to next track"""
@@ -68,7 +67,6 @@ class SpotifyAPI:
             requests.post(endpoint, headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def change_playing_status(self) -> None:
         """Function starts play or pauses music based on current status."""
@@ -81,7 +79,6 @@ class SpotifyAPI:
                 self.start_playback()
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def pause_playback(self) -> None:
         """Function pauses playing track"""
@@ -90,7 +87,6 @@ class SpotifyAPI:
             requests.put(endpoint, headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def start_playback(self) -> None:
         """Function starts playing paused track"""
@@ -99,7 +95,6 @@ class SpotifyAPI:
             requests.put(endpoint, headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def volume_down(self) -> None:
         """Function changes current volume <- current_volume - step """
@@ -112,7 +107,6 @@ class SpotifyAPI:
             requests.put(f"{endpoint}{volume}", headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def volume_up(self) -> None:
         """Function changes current volume <- current_volume + step """
@@ -125,7 +119,6 @@ class SpotifyAPI:
             requests.put(f"{endpoint}{volume}", headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def fav_track(self) -> None:
         """Function checks if current track is in the list of saved track and save or remove it from this list."""
@@ -141,7 +134,6 @@ class SpotifyAPI:
                 self.save_track(current_track_id)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def saved_tracks_id(self) -> list[str]:
         """Function creates list of saved tracks' id"""
@@ -158,7 +150,6 @@ class SpotifyAPI:
             return items_id
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def save_track(self, current_track_id: str) -> None:
         """Function adds track to saved playlist.
@@ -171,7 +162,6 @@ class SpotifyAPI:
             requests.put(f"{endpoint}{current_track_id}", headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
     def remove_track(self, current_track_id: str) -> None:
         """Function removes currently playing track from saved playlist.
@@ -184,5 +174,22 @@ class SpotifyAPI:
             requests.delete(f"{endpoint}{current_track_id}", headers=self.headers)
         except Exception as e:
             print(f"Exception: {e}")
-            print("Open spotify and start play music...")
 
+    def gesture_action(self, gesture: str) -> None:
+        """Function makes action based on gesture name from input_gesture queue.
+
+        Args:
+            gesture (str): name of detected gesture
+        """
+        if gesture == "next":
+            self.skip_to_next()
+        elif gesture == "prev":
+            self.skip_to_previous()
+        elif gesture == "love":
+            self.fav_track()
+        elif gesture == "louder":
+            self.volume_up()
+        elif gesture == "quieter":
+            self.volume_down()
+        elif gesture == "play_pause":
+            self.change_playing_status()

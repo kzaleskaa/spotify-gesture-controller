@@ -1,36 +1,40 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
-
-from queue import Queue
+import typing
 from typing import Type
 
 import cv2
 import mediapipe as mp
 import numpy as np
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt, pyqtSignal, QThread, QObject
 from PyQt5.QtGui import QImage
 from keras.models import load_model
 from mediapipe.python.solutions.holistic import Holistic
 
+from Spotify import SpotifyAPI
 from constants import ACTIONS, THRESHOLD
 
 
-class GestureRecognition:
+class GestureRecognition(QThread):
     """The class represents gesture recognition based on image from camera and created model."""
-    change_image = pyqtSignal(QImage)
-
-    def __init__(self, model_name: str) -> None:
+    def __init__(self, model_name: str="model/nadzieja.h5") -> None:
         """HandDetectionModel constructor.
 
         Args:
+            parent(typing.Optional[QObject]): pass
             model_name (str): file name to load the model
         """
+        super().__init__()
         self.mp_holistic = mp.solutions.holistic
         self.mp_drawing = mp.solutions.drawing_utils
         self.cap = cv2.VideoCapture(0)
         self.model_name = model_name
-        self.gesture = None
-        self.confidence = None
+        self.token = ""
+
+    change_gesture_name = pyqtSignal(str)
+    change_confidence = pyqtSignal(str)
+    change_image = pyqtSignal(QImage)
+    add_gesture = pyqtSignal(str)
 
     def hand_prediction(self, frame: np.ndarray, model: Holistic) -> Type:
         """Function makes prediction based on holistic model
@@ -91,16 +95,13 @@ class GestureRecognition:
         scaled_image = converted_image.scaled(600, 600, Qt.KeepAspectRatio)
         return scaled_image
 
-    def detect_gestures(self, output_gesture: Queue[str], change_image) -> None:
-        """Function detect gestures based on image from camera and add detected gesture's name to the queue.
-
-        Args:
-            output_gesture (Queue[str]): queue to save detected gesture' information
-            change_image (): pass
-        """
+    def detect_gestures(self) -> None:
+        """Function detect gestures based on image from camera and add detected gesture's name to the queue."""
         landmarks_from_frame = []
 
         model = load_model(self.model_name)
+
+        spotify = SpotifyAPI(token=self.token)
 
         with self.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
             while self.cap.isOpened():
@@ -115,7 +116,7 @@ class GestureRecognition:
 
                 self.create_landmarks(frame, results)
 
-                change_image.emit(self.convert_image(frame))
+                self.change_image.emit(self.convert_image(frame))
 
                 landmarks = self.save_landmarks(results)
 
@@ -131,13 +132,11 @@ class GestureRecognition:
                     max_prediction_index = np.argmax(prediction)
 
                     if prediction[max_prediction_index] > THRESHOLD:
-                        self.confidence = prediction[max_prediction_index]
-                        self.gesture = ACTIONS[max_prediction_index]
-                        gesture_info = {
-                            "gesture": self.gesture,
-                            "confidence": str(round(self.confidence*100, 2)),
-                        }
-                        output_gesture.put(gesture_info)
+                        confidence = prediction[max_prediction_index]
+                        gesture = ACTIONS[max_prediction_index]
+                        self.change_gesture_name.emit(gesture)
+                        spotify.gesture_action(gesture)
+                        self.change_confidence.emit(str(round(confidence*100, 2)))
                         landmarks_from_frame = []
 
                 cv2.waitKey(10)
@@ -147,3 +146,6 @@ class GestureRecognition:
 
         self.cap.release()
         cv2.destroyAllWindows()
+
+    def run(self):
+        self.detect_gestures()
