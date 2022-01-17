@@ -1,6 +1,3 @@
-# Katarzyna Zaleska
-# WCY19IJ1S1
-
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'DetectionWindow.ui'
@@ -18,6 +15,8 @@ class Ui_DetectionWindow(object):
     def setupUi(self, DetectionWindow):
         DetectionWindow.setObjectName("DetectionWindow")
         DetectionWindow.resize(996, 592)
+        DetectionWindow.setMinimumSize(QtCore.QSize(996, 592))
+        DetectionWindow.setMaximumSize(QtCore.QSize(996, 592))
         DetectionWindow.setStyleSheet("QDialog {\n"
 "background-color:  #2a292e;\n"
 "}\n"
@@ -89,12 +88,12 @@ class Ui_DetectionWindow(object):
         self.detection_confidence.setText(_translate("DetectionWindow", "<html><head/><body><p><br/></p></body></html>"))
         self.pushButton_2.setText(_translate("DetectionWindow", "START"))
 
-#
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     DetectionWindow = QtWidgets.QDialog()
-#     ui = Ui_DetectionWindow()
-#     ui.setupUi(DetectionWindow)
-#     DetectionWindow.show()
-#     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    DetectionWindow = QtWidgets.QDialog()
+    ui = Ui_DetectionWindow()
+    ui.setupUi(DetectionWindow)
+    DetectionWindow.show()
+    sys.exit(app.exec_())

@@ -1,13 +1,11 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
-from threading import Thread
 
-from PyQt5.QtCore import pyqtSlot, pyqtSignal
+from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QDialog
 
-from GestureRecognition import GestureRecognition
-from queue import Queue
+from GestureRecognitionThread import GestureRecognitionThread
 from pyui.DetectionWindow import Ui_DetectionWindow
 
 
@@ -19,20 +17,24 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         self.setupUi(self)
         self.token = ""
         self._connect_buttons()
-        self.queue = Queue()
-        self.detection = GestureRecognition()
+        self.detection = GestureRecognitionThread()
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""
         self.pushButton_2.clicked.connect(self.connection_action)
 
     def connection_action(self) -> None:
+        """Function starts action of created thread."""
         self.detection.change_image.connect(self.update_image)
         self.detection.change_confidence.connect(self.update_confidence)
         self.detection.change_gesture_name.connect(self.update_gesture_name)
-        self.detection.add_gesture.connect(self.add_gesture)
         self.detection.token = self.token
         self.detection.start()
+
+    def closeEvent(self, event) -> None:
+        """Functions finish detection QThread and close DetectionWindow"""
+        self.detection.is_running = False
+        self.close()
 
     @pyqtSlot(str)
     def update_confidence(self, confidence: str) -> None:
@@ -60,7 +62,3 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
             image (QImage): converted frame from camera
         """
         self.detection_camera.setPixmap(QPixmap.fromImage(image))
-
-    @pyqtSlot(str)
-    def add_gesture(self, gesture_name: str) -> None:
-        self.q.put(gesture_name)

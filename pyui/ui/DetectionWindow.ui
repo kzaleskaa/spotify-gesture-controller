@@ -10,6 +10,18 @@
     <height>592</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>996</width>
+    <height>592</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>996</width>
+    <height>592</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Detection</string>
   </property>

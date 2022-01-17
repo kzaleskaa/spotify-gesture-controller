@@ -15,7 +15,7 @@ from Spotify import SpotifyAPI
 from constants import ACTIONS, THRESHOLD
 
 
-class GestureRecognition(QThread):
+class GestureRecognitionThread(QThread):
     """The class represents gesture recognition based on image from camera and created model."""
     def __init__(self, model_name: str="model/nadzieja.h5") -> None:
         """HandDetectionModel constructor.
@@ -30,6 +30,7 @@ class GestureRecognition(QThread):
         self.cap = cv2.VideoCapture(0)
         self.model_name = model_name
         self.token = ""
+        self.is_running = True
 
     change_gesture_name = pyqtSignal(str)
     change_confidence = pyqtSignal(str)
@@ -104,7 +105,7 @@ class GestureRecognition(QThread):
         spotify = SpotifyAPI(token=self.token)
 
         with self.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
-            while self.cap.isOpened():
+            while self.cap.isOpened() and self.is_running:
 
                 ret, frame = self.cap.read()
 
@@ -140,9 +141,6 @@ class GestureRecognition(QThread):
                         landmarks_from_frame = []
 
                 cv2.waitKey(10)
-
-            self.cap.release()
-            cv2.destroyAllWindows()
 
         self.cap.release()
         cv2.destroyAllWindows()

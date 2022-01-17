@@ -26,7 +26,7 @@ class AuthorizationWindow(QDialog, Ui_AuthorizationWindow):
         self.create_submit_message("Waiting...", "#bbb")
         client_id = self.entered_client_id.text()
         client_secret = self.entered_client_secret.text()
-        spotify_account = SpotifyAPI(client_id=client_id,client_secret=client_secret)
+        spotify_account = SpotifyAPI(client_id=client_id, client_secret=client_secret)
         token = spotify_account.get_token()
 
         if token:
