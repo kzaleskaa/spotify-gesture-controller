@@ -36,6 +36,7 @@ class GestureRecognitionThread(QThread):
     change_confidence = pyqtSignal(str)
     change_image = pyqtSignal(QImage)
     add_gesture = pyqtSignal(str)
+    clear_labels = pyqtSignal()
 
     def hand_prediction(self, frame: np.ndarray, model: Holistic) -> Type:
         """Function makes prediction based on holistic model
@@ -96,7 +97,7 @@ class GestureRecognitionThread(QThread):
         scaled_image = converted_image.scaled(600, 600, Qt.KeepAspectRatio)
         return scaled_image
 
-    def detect_gestures(self) -> None:
+    def run(self) -> None:
         """Function detect gestures based on image from camera and add detected gesture's name to the queue."""
         landmarks_from_frame = []
 
@@ -142,8 +143,7 @@ class GestureRecognitionThread(QThread):
 
                 cv2.waitKey(10)
 
-        self.cap.release()
-        cv2.destroyAllWindows()
+            self.cap.release()
+            cv2.destroyAllWindows()
+            self.clear_labels.emit()
 
-    def run(self):
-        self.detect_gestures()

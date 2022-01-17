@@ -50,3 +50,8 @@ class AuthorizationWindow(QDialog, Ui_AuthorizationWindow):
 
     def _on_login_button_clicked(self) -> None:
         self.check_connection()
+
+    def closeEvent(self, event) -> None:
+        self.entered_client_id.clear()
+        self.entered_client_secret.clear()
+        self.close()

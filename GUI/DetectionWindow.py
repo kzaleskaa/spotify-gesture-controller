@@ -1,7 +1,6 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
-
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QDialog
 
@@ -28,13 +27,20 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         self.detection.change_image.connect(self.update_image)
         self.detection.change_confidence.connect(self.update_confidence)
         self.detection.change_gesture_name.connect(self.update_gesture_name)
+        self.detection.clear_labels.connect(self.clear_labels)
         self.detection.token = self.token
         self.detection.start()
 
     def closeEvent(self, event) -> None:
-        """Functions finish detection QThread and close DetectionWindow"""
+        """Function overrides method in QDialog -> finish detection QThread and close DetectionWindow."""
         self.detection.is_running = False
+        self.detection = GestureRecognitionThread()
         self.close()
+
+    def keyPressEvent(self, event) -> None:
+        """Function overrides method in QDialog -> close after press escape button."""
+        if event.key() == Qt.Key_Escape:
+            self.close()
 
     @pyqtSlot(str)
     def update_confidence(self, confidence: str) -> None:
@@ -62,3 +68,10 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
             image (QImage): converted frame from camera
         """
         self.detection_camera.setPixmap(QPixmap.fromImage(image))
+
+    @pyqtSlot()
+    def clear_labels(self) -> None:
+        """Function clear labels after close Detection Window"""
+        self.detection_camera.clear()
+        self.detected_gesture_name.clear()
+        self.detection_confidence.clear()
