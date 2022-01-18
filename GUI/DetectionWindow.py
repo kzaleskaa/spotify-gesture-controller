@@ -2,7 +2,7 @@
 # WCY19IJ1S1
 
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtGui import QImage, QPixmap, QIcon
 from PyQt5.QtWidgets import QDialog
 
 from GestureRecognitionThread import GestureRecognitionThread
@@ -18,6 +18,7 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         self.token = ""
         self._connect_buttons()
         self.detection = GestureRecognitionThread()
+        self.setWindowIcon(QIcon('pyui/icons/hand-recognition.png'))
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""
@@ -50,7 +51,8 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         Args:
             confidence (str): confidence of detected gesture
         """
-        self.detection_confidence.setText(f"Confidence: {confidence}%")
+        self.detection_confidence.setText(confidence)
+        self.detection_confidence.setAlignment(Qt.AlignCenter)
 
     @pyqtSlot(str)
     def update_gesture_name(self, gesture_name: str) -> None:
@@ -59,7 +61,8 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         Args:
             gesture_name (str): name of detected gesture
         """
-        self.detected_gesture_name.setText(f"Gesture name: {gesture_name}")
+        self.detected_gesture_name.setText(gesture_name)
+        self.detected_gesture_name.setAlignment(Qt.AlignCenter)
 
     @pyqtSlot(QImage)
     def update_image(self, image: QImage) -> None:

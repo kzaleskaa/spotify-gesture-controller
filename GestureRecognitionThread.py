@@ -137,7 +137,7 @@ class GestureRecognitionThread(QThread):
                         gesture = ACTIONS[max_prediction_index]
                         self.change_gesture_name.emit(gesture)
                         spotify.gesture_action(gesture)
-                        self.change_confidence.emit(str(round(confidence*100, 2)))
+                        self.change_confidence.emit(str(f"{round(confidence*100, 2)}%"))
                         landmarks_from_frame = []
 
                 cv2.waitKey(10)
@@ -145,4 +145,3 @@ class GestureRecognitionThread(QThread):
             self.cap.release()
             cv2.destroyAllWindows()
             self.clear_labels.emit()
-

@@ -4,6 +4,7 @@
 from configparser import ConfigParser
 from typing import Any
 
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow
 
 from GUI.Authorization import AuthorizationWindow
@@ -24,6 +25,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.login = None
         self.detection_window = DetectionWindow()
         self.auth_window = AuthorizationWindow()
+        self.setWindowIcon(QIcon('pyui/icons/sound-waves.png'))
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""

@@ -3,6 +3,7 @@
 
 from configparser import ConfigParser
 
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 
 from Spotify import SpotifyAPI
@@ -14,6 +15,7 @@ class AuthorizationWindow(QDialog, Ui_AuthorizationWindow):
         super().__init__()
         self.setupUi(self)
         self._connect_buttons()
+        self.setWindowIcon(QIcon('pyui/icons/authorization.png'))
 
     def _connect_buttons(self) -> None:
         self.submit_btn.clicked.connect(self._on_login_button_clicked)
