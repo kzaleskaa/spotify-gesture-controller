@@ -11,5 +11,5 @@ SCOPE = 'user-modify-playback-state user-read-playback-state user-library-read u
 THRESHOLD = 0.995
 SEQUENCE_LENGTH = 30
 NO_SEQUENCES = 66
-DATA_PATH = os.path.join('MP_DATA_FUNC')
+DATA_PATH = os.path.join('data', 'MP_DATA')
 ACTIONS = np.array(['next', 'prev', 'love', 'louder', 'quieter', 'play_pause'])

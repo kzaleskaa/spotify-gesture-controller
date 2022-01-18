@@ -1,4 +1,4 @@
-model/
+model_examples/
 data/
 Logs/
 
@@ -8,5 +8,3 @@ __pycache__/
 .cache
 
 .env
-
-config.ini

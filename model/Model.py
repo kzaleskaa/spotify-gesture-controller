@@ -18,15 +18,15 @@ from constants import ACTIONS, NO_SEQUENCES, DATA_PATH, SEQUENCE_LENGTH
 
 
 class Model:
-    """The class represents the Model created based on the frames from camera. Created model will be saved and used
+    """The class represents the Model created based on the frames from camera. Created model_examples will be saved and used
     to make prediction in GestureRecogniton file. This class isn't used in my app (except of earlier created file
-    {model_name}.h5). You can create your own data set and model based on functions below."""
+    {model_name}.h5). You can create your own data set and model_examples based on functions below."""
 
     def __init__(self, model_name: str) -> None:
         """HandDetectionModel constructor.
 
         Args:
-            model_name (str): file name to save the model
+            model_name (str): file name to save the created model
         """
         self.mp_holistic = mp.solutions.holistic
         self.mp_drawing = mp.solutions.drawing_utils
@@ -34,11 +34,11 @@ class Model:
         self.model_name = model_name
 
     def hand_prediction(self, frame: np.ndarray, model: Holistic) -> Type:
-        """Function makes prediction based on holistic model
+        """Function makes prediction based on holistic model_examples
 
         Args:
             frame (np.ndarray): frame from camera
-            model (Holistic): holistic model used to prediction
+            model (Holistic): holistic model_examples used to prediction
 
         Returns:
             Type: effect of prediction
@@ -55,7 +55,7 @@ class Model:
         for action in range(len(ACTIONS)):
             for sequence in range(NO_SEQUENCES):
                 try:
-                    os.makedirs(os.path.join("data", DATA_PATH, ACTIONS[action], str(sequence)))
+                    os.makedirs(os.path.join("../data", DATA_PATH, ACTIONS[action], str(sequence)))
                 except Exception as e:
                     print(f"Exception: {e}")
 
@@ -103,7 +103,7 @@ class Model:
             frame_num (int): frame number in sequence
         """
         landmarks = self.save_landmarks(results)
-        path = os.path.join("data", DATA_PATH, action, str(sequence), str(frame_num))
+        path = os.path.join("../data", DATA_PATH, action, str(sequence), str(frame_num))
         np.save(path, landmarks)
 
     def create_dataset(self) -> None:
@@ -157,7 +157,7 @@ class Model:
 
                 for frame_num in range(SEQUENCE_LENGTH):
                     # path with location of frame
-                    path = os.path.join("data", DATA_PATH, action, str(sequnce), f"{frame_num}.npy")
+                    path = os.path.join("../data", DATA_PATH, action, str(sequnce), f"{frame_num}.npy")
                     loaded_frame = np.load(path)
                     frames_in_sequence.append(loaded_frame)
 
@@ -171,7 +171,7 @@ class Model:
         return data_sequnces, data_labels
 
     def create_model(self) -> None:
-        """Function create model based on DATA_PATH and save it to the file model_name.h5"""
+        """Function create model_examples based on DATA_PATH and save it to the file model_name.h5"""
         X, y = self.prepare_data()
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
@@ -192,7 +192,7 @@ class Model:
 
         model.fit(X_train, y_train, epochs=100, batch_size=32)
 
-        model.save(f'model/{self.model_name}.h5')
+        model.save(f'model_examples/{self.model_name}.h5')
 
         del model
 

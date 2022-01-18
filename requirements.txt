@@ -160,3 +160,13 @@ zeromq=4.3.4=h0e60522_1
 zipp=3.6.0=pyhd8ed1ab_0
 zlib=1.2.11=h62dcd97_4
 zstd=1.4.9=h19a0ad4_0
+
+pyqt5~=5.15.6
+opencv-python~=4.5.4.60
+mediapipe~=0.8.9
+numpy~=1.21.4
+keras~=2.7.0
+scikit-learn~=1.0.1
+tensorflow~=2.7.0
+requests~=2.26.0
+spotipy~=2.19.0

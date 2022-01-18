@@ -16,12 +16,12 @@ from constants import ACTIONS, THRESHOLD
 
 
 class GestureRecognitionThread(QThread):
-    """The class represents gesture recognition based on image from camera and created model."""
-    def __init__(self, model_name: str="model/nadzieja.h5") -> None:
+    """The class represents gesture recognition based on image from camera and created model_examples."""
+    def __init__(self, model_name: str = "model/model.h5") -> None:
         """HandDetectionModel constructor.
 
         Args:
-            model_name (str): file name to load the model
+            model_name (str): file name to load the model_examples
         """
         super().__init__()
         self.mp_holistic = mp.solutions.holistic
@@ -38,11 +38,11 @@ class GestureRecognitionThread(QThread):
     clear_labels = pyqtSignal()
 
     def hand_prediction(self, frame: np.ndarray, model: Holistic) -> Type:
-        """Function makes prediction based on holistic model
+        """Function makes prediction based on holistic model.
 
         Args:
             frame (np.ndarray): frame from camera
-            model (Holistic): holistic model used to prediction
+            model (Holistic): holistic model_examples used to prediction
 
         Returns:
             Type: effect of prediction

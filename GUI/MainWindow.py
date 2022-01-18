@@ -25,7 +25,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.login = None
         self.detection_window = DetectionWindow()
         self.auth_window = AuthorizationWindow()
-        self.setWindowIcon(QIcon('pyui/icons/sound-waves.png'))
+        self.setWindowIcon(QIcon('icons/sound-waves.png'))
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""

@@ -18,7 +18,7 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         self.token = ""
         self._connect_buttons()
         self.detection = GestureRecognitionThread()
-        self.setWindowIcon(QIcon('pyui/icons/hand-recognition.png'))
+        self.setWindowIcon(QIcon('icons/hand-recognition.png'))
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""
@@ -79,3 +79,5 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         self.detection_camera.clear()
         self.detected_gesture_name.clear()
         self.detection_confidence.clear()
+        self.detection_camera.setText("CLICK START, OPEN SPOTIFY AND START PLAY MUSIC")
+        self.detection_camera.setAlignment(Qt.AlignCenter)
