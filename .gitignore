@@ -1,0 +1,10 @@
+model_examples/
+data/
+Logs/
+
+.idea/
+__pycache__/
+
+.cache
+
+.env
