@@ -143,5 +143,5 @@ class GestureRecognitionThread(QThread):
                 cv2.waitKey(10)
 
             self.cap.release()
-            cv2.destroyAllWindows()
+            # cv2.destroyAllWindows()
             self.clear_labels.emit()

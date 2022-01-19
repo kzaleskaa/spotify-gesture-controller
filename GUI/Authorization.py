@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QDialog
 from Spotify import SpotifyAPI
 from pyui.Authorization import Ui_AuthorizationWindow
 
+# TO-DO: change authorization
 
 class AuthorizationWindow(QDialog, Ui_AuthorizationWindow):
     """Class represents authorization window."""
