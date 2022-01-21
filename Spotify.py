@@ -27,6 +27,21 @@ class SpotifyAPI:
             "Authorization": f"Bearer {self.token}"
         }
 
+    def make_authorization(self) -> None:
+        scope = ["user-modify-playback-state", "user-read-playback-state", "user-library-read", "user-library-modify",
+                 "user-read-currently-playing"]
+        parameter = {
+            "url": f"https://accounts.spotify.com/authorize/?client_id={self.client_id}",
+            "response_type": "code",
+            "redirect_uri": "http://localhost:8888/spotify-api/callback/",
+            "scope": "%20".join(scope),
+            "show_dialog": "true"
+        }
+
+        redirect_url = "&".join('{}={}'.format(key, value) for key, value in parameter.items())
+
+        print(redirect_url)
+
     def get_token(self) -> str:
         """Function make authorization and set token"""
         try:
@@ -193,3 +208,7 @@ class SpotifyAPI:
             self.volume_down()
         elif gesture == "play_pause":
             self.change_playing_status()
+
+
+spotify =SpotifyAPI()
+spotify.make_authorization()

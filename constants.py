@@ -8,6 +8,7 @@ TOKEN_URL = "https://accounts.spotify.com/api/token"
 # scope <- what I get access to for example 'user-read-currently-playing'
 SCOPE = 'user-modify-playback-state user-read-playback-state user-library-read user-library-modify user-read-currently-playing'
 
+
 THRESHOLD = 0.995
 SEQUENCE_LENGTH = 30
 NO_SEQUENCES = 66
