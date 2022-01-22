@@ -1,56 +1,48 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
+import os
 
 import requests
+
+from PyQt5.QtCore import QThread, pyqtSignal
 from spotipy.oauth2 import SpotifyOAuth
 
 from constants import SCOPE
 
 
-class SpotifyAPI:
+class SpotifyAPI(QThread):
     """The class represents connection with Spotify API."""
-    def __init__(self, client_id: str = "", client_secret: str = "", token: str = "", redirect_uri: str = "http://localhost:9000") -> None:
+    def __init__(self, token: str = "") -> None:
         """SpotifyAPI constructor.
 
         Args:
-            client_id (str): the unique identifier of your app
-            client_secret (str): the key you will use to authorize your Web API
             token (str): represents the authorization
-            redirect_uri (str): after user approves, where do we send them back to?
         """
-        super(SpotifyAPI, self).__init__()
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.redirect_uri = redirect_uri
+        super().__init__()
+        self.client_id = os.getenv('CLIENT_ID')
+        self.client_secret = os.getenv('CLIENT_SECRET')
+        self.redirect_uri = "http://localhost:8888/spotify-api/callback/"
         self.token = token
         self.headers = {
             "Authorization": f"Bearer {self.token}"
         }
 
-    def make_authorization(self) -> None:
-        scope = ["user-modify-playback-state", "user-read-playback-state", "user-library-read", "user-library-modify",
-                 "user-read-currently-playing"]
-        parameter = {
-            "url": f"https://accounts.spotify.com/authorize/?client_id={self.client_id}",
-            "response_type": "code",
-            "redirect_uri": "http://localhost:8888/spotify-api/callback/",
-            "scope": "%20".join(scope),
-            "show_dialog": "true"
-        }
-
-        redirect_url = "&".join('{}={}'.format(key, value) for key, value in parameter.items())
-
-        print(redirect_url)
+    change_token = pyqtSignal(str)
+    change_msg = pyqtSignal(str)
 
     def get_token(self) -> str:
         """Function make authorization and set token"""
+        self.change_msg.emit("Waiting...")
         try:
             oauth = SpotifyOAuth(client_id=self.client_id, client_secret=self.client_secret,
-                          redirect_uri=self.redirect_uri, scope=SCOPE)
-            self.token = oauth.get_access_token()['access_token']
+                          redirect_uri=self.redirect_uri, scope=SCOPE, show_dialog=True)
+            self.token = oauth.get_access_token(as_dict=False, check_cache=False)
+            self.change_token.emit(self.token)
+            self.change_msg.emit("Successful, let's use this app!")
             return self.token
         except Exception as e:
             print(f"Exception: {e}")
+            self.change_msg.emit("Authentication failed, please try again.")
 
     def get_playback_state(self) -> dict:
         """Function get information about the user's current playback state,
@@ -209,6 +201,5 @@ class SpotifyAPI:
         elif gesture == "play_pause":
             self.change_playing_status()
 
-
-spotify =SpotifyAPI()
-spotify.make_authorization()
+    def run(self):
+        self.get_token()
