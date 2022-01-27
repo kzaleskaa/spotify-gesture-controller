@@ -21,17 +21,21 @@ Spotify Gesture Controller is a project realised during "Programming in function
    git clone https://github.com/kzaleskaa/hand-gesture-recognition.git
    cd hand-gesture-recognition
    ```
-2. Create a new project at [Spotify Dashboard](https://developer.spotify.com/dashboard/) and edit settings - add ```http://localhost:9000``` in Redirect URLs.
+2. Create a new project at [Spotify Dashboard](https://developer.spotify.com/dashboard/) and edit settings - add ```http://localhost:8888/spotify-api/callback/``` in Redirect URLs.
 3. Create your conda environment and install all requirements
    ```
    $ conda create --name <env> --file <file with requirements>
+   ```
+4. In root project directory, create .env file with following content (from your Spotify Dashboard):
+   ```
+   CLIENT_ID = <YOUR CLIENT ID>
+   CLIENT_SECRET = <YOUR CLIENT SECRET>
    ```
 5. Start app
    ```
    python main.py
    ```
-6. Make authorization (use client id and client secret from your Spotify Dashboard)
-7. Open your spotify app, start play music and use this app to control it
+6. Open your spotify app, start play music and use this app to control it
 
 ## ✋ Gestures
 

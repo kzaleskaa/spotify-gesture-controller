@@ -2,7 +2,6 @@
 # WCY19IJ1S1
 
 from typing import Type
-
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -10,7 +9,6 @@ from PyQt5.QtCore import Qt, pyqtSignal, QThread
 from PyQt5.QtGui import QImage
 from keras.models import load_model
 from mediapipe.python.solutions.holistic import Holistic
-
 from Spotify import SpotifyAPI
 from constants import ACTIONS, THRESHOLD
 
@@ -143,5 +141,4 @@ class GestureRecognitionThread(QThread):
                 cv2.waitKey(10)
 
             self.cap.release()
-            # cv2.destroyAllWindows()
             self.clear_labels.emit()
