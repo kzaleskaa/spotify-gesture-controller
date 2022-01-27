@@ -3,7 +3,6 @@
 
 import os
 from typing import Type
-
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -195,4 +194,3 @@ class Model:
         model.save(f'model_examples/{self.model_name}.h5')
 
         del model
-

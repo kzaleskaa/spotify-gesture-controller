@@ -1,12 +1,10 @@
 # Katarzyna Zaleska
 # WCY19IJ1S1
+
 import os
-
 import requests
-
 from PyQt5.QtCore import QThread, pyqtSignal
 from spotipy.oauth2 import SpotifyOAuth
-
 from constants import SCOPE
 
 
