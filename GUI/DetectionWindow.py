@@ -2,7 +2,7 @@ from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtGui import QIcon, QImage, QPixmap
 from PyQt5.QtWidgets import QDialog
 
-from GestureRecognitionThread import GestureRecognitionThread
+from components.GestureRecognition import GestureRecognitionThread
 from pyui.DetectionWindow import Ui_DetectionWindow
 
 

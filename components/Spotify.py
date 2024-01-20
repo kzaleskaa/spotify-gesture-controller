@@ -1,6 +1,3 @@
-# Katarzyna Zaleska
-# WCY19IJ1S1
-
 import os
 
 import requests
