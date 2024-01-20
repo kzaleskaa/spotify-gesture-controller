@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMainWindow
 
 from GUI.DetectionWindow import DetectionWindow
 from pyui.StartWindow import Ui_MainWindow
-from spotify.Spotify import SpotifyAPI
+from components.Spotify import SpotifyAPI
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
