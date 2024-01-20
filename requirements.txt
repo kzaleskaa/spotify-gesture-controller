@@ -1,12 +1,10 @@
-keras==2.11.0
+keras==2.15.0
 mediapipe==0.10.9
-numpy==1.15.1
+numpy==1.24.3
 opencv_python==4.6.0.66
 PyQt5==5.15.10
-PyQt5_sip==12.11.0
+python-dotenv==1.0.0
 Requests==2.31.0
-scikit_learn==1.2.2
+scikit_learn==1.4.0
 spotipy==2.23.0
-tensorflow==2.11.0
-tensorflow==2.10.1
-tensorflow_intel==2.11.0
+tensorflow==2.15.0

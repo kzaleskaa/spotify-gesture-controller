@@ -13,6 +13,8 @@ Spotify Gesture Controller is a project realised during "Programming in function
 - add/remove song to saved
 - volume up/down music
 
+using hand gestures. To do this, **Python 3.9** was used with **OpenCV** and **MediaPipe** libraries. **Tensorflow** model was trained on custom dataset, which was created by myself.
+
 ## 🏃‍ How to install and run it?
 **Remember: to use this app you need to have premium version of Spotify.**
 
@@ -23,13 +25,13 @@ Spotify Gesture Controller is a project realised during "Programming in function
    ```
 2. Create a new project at [Spotify Dashboard](https://developer.spotify.com/dashboard/) and edit settings - add ```http://localhost:8888/spotify-api/callback/``` in Redirect URLs.
 3. Create your conda environment and install all requirements
-   ```
-   $ conda create --name <env> --file <file with requirements>
+   ```bash
+   $ python -m venv venv
    ```
 4. In root project directory, create .env file with following content (from your Spotify Dashboard):
    ```
-   CLIENT_ID = <YOUR CLIENT ID>
-   CLIENT_SECRET = <YOUR CLIENT SECRET>
+   CLIENT_ID=<YOUR CLIENT ID>
+   CLIENT_SECRET=<YOUR CLIENT SECRET>
    ```
 5. Start app
    ```
@@ -45,7 +47,7 @@ Spotify Gesture Controller is a project realised during "Programming in function
 ## 🎶 Spotify API
 >Based on simple REST principles, the Spotify Web API endpoints return JSON metadata about music artists, albums, and tracks, directly from the Spotify Data Catalogue.
 
-If no action on Spotify is made, please open your app and start play music manually. 
+If no action on Spotify is made, please open your app and start play music manually. Then, you can use this app to control it.
 
 ## 🖊 Credits
 - Heart photo created by nakaridore - [Freepik](www.freepik.com)
