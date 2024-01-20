@@ -9,7 +9,7 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QImage
 
 from constants import ACTIONS, THRESHOLD
-from Spotify import SpotifyAPI
+from spotify.Spotify import SpotifyAPI
 
 
 class GestureRecognitionThread(QThread):
