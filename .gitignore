@@ -1,3 +1,5 @@
+venv/
+
 model_examples/
 data/
 Logs/

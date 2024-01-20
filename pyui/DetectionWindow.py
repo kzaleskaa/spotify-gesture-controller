@@ -17,33 +17,35 @@ class Ui_DetectionWindow(object):
         DetectionWindow.resize(996, 592)
         DetectionWindow.setMinimumSize(QtCore.QSize(996, 592))
         DetectionWindow.setMaximumSize(QtCore.QSize(996, 592))
-        DetectionWindow.setStyleSheet("QDialog {\n"
-"background-color:  #2a292e;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"color: white;\n"
-"font-size: 18px;\n"
-"font-weight: bold;\n"
-"}\n"
-"\n"
-"QPushButton{\n"
-"font-size: 18px;\n"
-"font-weight: bold;\n"
-"color: #1db954;\n"
-"border: 2px solid #1db954;\n"
-"border-radius: 14px;\n"
-"letter-spacing: 1px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"color: #121212;\n"
-"background-color:     #1db954;\n"
-"border: 2px solid #121212;\n"
-"}\n"
-"\n"
-"QHBoxLayout {\n"
-"border: 2px solid green;\n"
-"}")
+        DetectionWindow.setStyleSheet(
+            "QDialog {\n"
+            "background-color:  #2a292e;\n"
+            "}\n"
+            "\n"
+            "QLabel {\n"
+            "color: white;\n"
+            "font-size: 18px;\n"
+            "font-weight: bold;\n"
+            "}\n"
+            "\n"
+            "QPushButton{\n"
+            "font-size: 18px;\n"
+            "font-weight: bold;\n"
+            "color: #1db954;\n"
+            "border: 2px solid #1db954;\n"
+            "border-radius: 14px;\n"
+            "letter-spacing: 1px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "color: #121212;\n"
+            "background-color:     #1db954;\n"
+            "border: 2px solid #121212;\n"
+            "}\n"
+            "\n"
+            "QHBoxLayout {\n"
+            "border: 2px solid green;\n"
+            "}"
+        )
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(DetectionWindow)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -54,55 +56,64 @@ class Ui_DetectionWindow(object):
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setContentsMargins(10, 0, 10, 20)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout_4.addItem(spacerItem)
         self.label_3 = QtWidgets.QLabel(DetectionWindow)
         self.label_3.setMinimumSize(QtCore.QSize(0, 50))
-        self.label_3.setStyleSheet("color: white;\n"
-"border: 2px solid #535353;\n"
-"border-radius: 14px;\n"
-"margin-bottom: 10px;\n"
-"padding: 10px;\n"
-"")
+        self.label_3.setStyleSheet(
+            "color: white;\n"
+            "border: 2px solid #535353;\n"
+            "border-radius: 14px;\n"
+            "margin-bottom: 10px;\n"
+            "padding: 10px;\n"
+            ""
+        )
         self.label_3.setObjectName("label_3")
         self.verticalLayout_4.addWidget(self.label_3)
         self.verticalWidget = QtWidgets.QWidget(DetectionWindow)
-        self.verticalWidget.setStyleSheet("border: 2px solid #535353;\n"
-"border-radius: 14px;")
+        self.verticalWidget.setStyleSheet(
+            "border: 2px solid #535353;\n" "border-radius: 14px;"
+        )
         self.verticalWidget.setObjectName("verticalWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalWidget)
         self.verticalLayout.setContentsMargins(-1, -1, -1, 20)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(self.verticalWidget)
-        self.label.setStyleSheet("color: white;\n"
-"border: 2px solid #535353;\n"
-"border-radius: 14px;\n"
-"padding: 10px;\n"
-"margin: 10px;\n"
-"")
+        self.label.setStyleSheet(
+            "color: white;\n"
+            "border: 2px solid #535353;\n"
+            "border-radius: 14px;\n"
+            "padding: 10px;\n"
+            "margin: 10px;\n"
+            ""
+        )
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.detected_gesture_name = QtWidgets.QLabel(self.verticalWidget)
-        self.detected_gesture_name.setStyleSheet("color: #1db954;\n"
-"border: none;")
+        self.detected_gesture_name.setStyleSheet("color: #1db954;\n" "border: none;")
         self.detected_gesture_name.setObjectName("detected_gesture_name")
         self.verticalLayout.addWidget(self.detected_gesture_name)
         self.label_2 = QtWidgets.QLabel(self.verticalWidget)
-        self.label_2.setStyleSheet("color: white;\n"
-"border: 2px solid #535353;\n"
-"border-radius: 14px;\n"
-"padding: 10px;\n"
-"margin: 10px;\n"
-"")
+        self.label_2.setStyleSheet(
+            "color: white;\n"
+            "border: 2px solid #535353;\n"
+            "border-radius: 14px;\n"
+            "padding: 10px;\n"
+            "margin: 10px;\n"
+            ""
+        )
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
         self.detection_confidence = QtWidgets.QLabel(self.verticalWidget)
-        self.detection_confidence.setStyleSheet("color: #1db954;\n"
-"border: none;")
+        self.detection_confidence.setStyleSheet("color: #1db954;\n" "border: none;")
         self.detection_confidence.setObjectName("detection_confidence")
         self.verticalLayout.addWidget(self.detection_confidence)
         self.verticalLayout_4.addWidget(self.verticalWidget)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout_4.addItem(spacerItem1)
         self.information.addLayout(self.verticalLayout_4)
         self.horizontalLayout.addLayout(self.information)
@@ -112,10 +123,9 @@ class Ui_DetectionWindow(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.detection_camera = QtWidgets.QLabel(DetectionWindow)
         self.detection_camera.setMinimumSize(QtCore.QSize(600, 400))
-        self.detection_camera.setStyleSheet("QLabel {\n"
-"border-radius: 14px;\n"
-"border: 2px solid #535353;\n"
-"}")
+        self.detection_camera.setStyleSheet(
+            "QLabel {\n" "border-radius: 14px;\n" "border: 2px solid #535353;\n" "}"
+        )
         self.detection_camera.setObjectName("detection_camera")
         self.verticalLayout_3.addWidget(self.detection_camera)
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
@@ -138,10 +148,40 @@ class Ui_DetectionWindow(object):
     def retranslateUi(self, DetectionWindow):
         _translate = QtCore.QCoreApplication.translate
         DetectionWindow.setWindowTitle(_translate("DetectionWindow", "Detection"))
-        self.label_3.setText(_translate("DetectionWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">INFORMATION</span></p></body></html>"))
-        self.label.setText(_translate("DetectionWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">DETECTED GESTURE</span></p></body></html>"))
-        self.detected_gesture_name.setText(_translate("DetectionWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
-        self.label_2.setText(_translate("DetectionWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">CONFIDENCE</span></p></body></html>"))
-        self.detection_confidence.setText(_translate("DetectionWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
-        self.detection_camera.setText(_translate("DetectionWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">CLICK START, OPEN SPOTIFY AND START PLAY MUSIC </span></p></body></html>"))
+        self.label_3.setText(
+            _translate(
+                "DetectionWindow",
+                '<html><head/><body><p align="center"><span style=" font-size:14pt;">INFORMATION</span></p></body></html>',
+            )
+        )
+        self.label.setText(
+            _translate(
+                "DetectionWindow",
+                '<html><head/><body><p align="center"><span style=" font-size:14pt;">DETECTED GESTURE</span></p></body></html>',
+            )
+        )
+        self.detected_gesture_name.setText(
+            _translate(
+                "DetectionWindow",
+                '<html><head/><body><p align="center"><br/></p></body></html>',
+            )
+        )
+        self.label_2.setText(
+            _translate(
+                "DetectionWindow",
+                '<html><head/><body><p align="center"><span style=" font-size:14pt;">CONFIDENCE</span></p></body></html>',
+            )
+        )
+        self.detection_confidence.setText(
+            _translate(
+                "DetectionWindow",
+                '<html><head/><body><p align="center"><br/></p></body></html>',
+            )
+        )
+        self.detection_camera.setText(
+            _translate(
+                "DetectionWindow",
+                '<html><head/><body><p align="center"><span style=" font-size:14pt;">CLICK START, OPEN SPOTIFY AND START PLAY MUSIC </span></p></body></html>',
+            )
+        )
         self.pushButton_2.setText(_translate("DetectionWindow", "START"))

@@ -1,13 +1,10 @@
-# Katarzyna Zaleska
-# WCY19IJ1S1
-
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow
 
 from GUI.DetectionWindow import DetectionWindow
-from Spotify import SpotifyAPI
 from pyui.StartWindow import Ui_MainWindow
+from spotify.Spotify import SpotifyAPI
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -21,7 +18,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.token = ""
         self.detection_window = DetectionWindow()
         self.spotify_connection = SpotifyAPI()
-        self.setWindowIcon(QIcon('icons/sound-waves.png'))
+        self.setWindowIcon(QIcon("icons/sound-waves.png"))
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""

@@ -1,20 +1,20 @@
-# Katarzyna Zaleska
-# WCY19IJ1S1
-
 from typing import Type
+
 import cv2
 import mediapipe as mp
 import numpy as np
-from PyQt5.QtCore import Qt, pyqtSignal, QThread
-from PyQt5.QtGui import QImage
 from keras.models import load_model
 from mediapipe.python.solutions.holistic import Holistic
-from Spotify import SpotifyAPI
+from PyQt5.QtCore import Qt, QThread, pyqtSignal
+from PyQt5.QtGui import QImage
+
 from constants import ACTIONS, THRESHOLD
+from spotify.Spotify import SpotifyAPI
 
 
 class GestureRecognitionThread(QThread):
     """The class represents gesture recognition based on image from camera and created model_examples."""
+
     def __init__(self, model_name: str = "model/model.h5") -> None:
         """HandDetectionModel constructor.
 
@@ -59,13 +59,27 @@ class GestureRecognitionThread(QThread):
             image (np.ndarray): frame from camera
             results (Type): predicted hand
         """
-        landmarks_left_hand = self.mp_drawing.DrawingSpec(color=(255, 0, 144), thickness=2, circle_radius=2)
-        landmarks_right_hand = self.mp_drawing.DrawingSpec(color=(57, 255, 20), thickness=2, circle_radius=2)
+        landmarks_left_hand = self.mp_drawing.DrawingSpec(
+            color=(255, 0, 144), thickness=2, circle_radius=2
+        )
+        landmarks_right_hand = self.mp_drawing.DrawingSpec(
+            color=(57, 255, 20), thickness=2, circle_radius=2
+        )
         connection_line = self.mp_drawing.DrawingSpec(thickness=4, color=(90, 90, 90))
-        self.mp_drawing.draw_landmarks(image, results.left_hand_landmarks, self.mp_holistic.HAND_CONNECTIONS,
-                                       landmarks_left_hand, connection_line)
-        self.mp_drawing.draw_landmarks(image, results.right_hand_landmarks, self.mp_holistic.HAND_CONNECTIONS,
-                                       landmarks_right_hand, connection_line)
+        self.mp_drawing.draw_landmarks(
+            image,
+            results.left_hand_landmarks,
+            self.mp_holistic.HAND_CONNECTIONS,
+            landmarks_left_hand,
+            connection_line,
+        )
+        self.mp_drawing.draw_landmarks(
+            image,
+            results.right_hand_landmarks,
+            self.mp_holistic.HAND_CONNECTIONS,
+            landmarks_right_hand,
+            connection_line,
+        )
 
     def save_landmarks(self, results: Type) -> np.ndarray:
         """Function creates array with coordinates of landmarks.
@@ -79,10 +93,14 @@ class GestureRecognitionThread(QThread):
         left_hand_points = right_hand_points = np.zeros(63)
 
         if results.left_hand_landmarks:
-            left_hand_points = np.array([[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]).flatten()
+            left_hand_points = np.array(
+                [[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]
+            ).flatten()
 
         if results.right_hand_landmarks:
-            right_hand_points = np.array([[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]).flatten()
+            right_hand_points = np.array(
+                [[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]
+            ).flatten()
 
         return np.concatenate([left_hand_points, right_hand_points])
 
@@ -102,9 +120,10 @@ class GestureRecognitionThread(QThread):
 
         spotify = SpotifyAPI(token=self.token)
 
-        with self.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
+        with self.mp_holistic.Holistic(
+            min_detection_confidence=0.5, min_tracking_confidence=0.5
+        ) as holistic:
             while self.cap.isOpened() and self.is_running:
-
                 ret, frame = self.cap.read()
 
                 if not ret:

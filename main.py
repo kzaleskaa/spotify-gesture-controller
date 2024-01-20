@@ -1,9 +1,7 @@
-# Katarzyna Zaleska
-# WCY19IJ1S1
-
 import sys
 
 from PyQt5.QtWidgets import QApplication
+
 from GUI.MainWindow import MainWindow
 
 
