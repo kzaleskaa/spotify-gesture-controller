@@ -26,28 +26,30 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         MainWindow.setWindowOpacity(1.0)
         MainWindow.setAutoFillBackground(False)
-        MainWindow.setStyleSheet("QWidget #main_layout{\n"
-"    background-image: url(./pyui/ui/bgc.png);\n"
-"    background-repeat: no-repeat;\n"
-"    background-position: bottom;\n"
-"    background-color: #2a292e;\n"
-"    border: 3px solid #1db954;\n"
-"    border-radius: 5px;\n"
-"    padding: 10px;\n"
-"}\n"
-"QPushButton{\n"
-"font-size: 18px;\n"
-"font-weight: bold;\n"
-"color: #1db954;\n"
-"border: 2px solid #1db954;\n"
-"border-radius: 14px;\n"
-"letter-spacing: 1px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"color: #121212;\n"
-"background-color:     #1db954;\n"
-"border: 2px solid #121212;\n"
-"}")
+        MainWindow.setStyleSheet(
+            "QWidget #main_layout{\n"
+            "    background-image: url(./pyui/ui/bgc.png);\n"
+            "    background-repeat: no-repeat;\n"
+            "    background-position: bottom;\n"
+            "    background-color: #2a292e;\n"
+            "    border: 3px solid #1db954;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 10px;\n"
+            "}\n"
+            "QPushButton{\n"
+            "font-size: 18px;\n"
+            "font-weight: bold;\n"
+            "color: #1db954;\n"
+            "border: 2px solid #1db954;\n"
+            "border-radius: 14px;\n"
+            "letter-spacing: 1px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "color: #121212;\n"
+            "background-color:     #1db954;\n"
+            "border: 2px solid #121212;\n"
+            "}"
+        )
         self.main_layout = QtWidgets.QWidget(MainWindow)
         self.main_layout.setMinimumSize(QtCore.QSize(518, 425))
         self.main_layout.setMaximumSize(QtCore.QSize(518, 425))
@@ -73,13 +75,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label = QtWidgets.QLabel(self.main_layout)
         self.label.setMinimumSize(QtCore.QSize(0, 100))
-        self.label.setStyleSheet("QLabel {\n"
-"color: #1db954;\n"
-"font-size: 20px;\n"
-"font-weight: bold;\n"
-"}")
+        self.label.setStyleSheet(
+            "QLabel {\n"
+            "color: #1db954;\n"
+            "font-size: 20px;\n"
+            "font-weight: bold;\n"
+            "}"
+        )
         self.label.setObjectName("label")
-        self.horizontalLayout.addWidget(self.label, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.horizontalLayout.addWidget(
+            self.label, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
+        )
         self.verticalLayout_61.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
@@ -102,19 +108,21 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.start_btn.setFont(font)
         self.start_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.start_btn.setStyleSheet("QPushButton{\n"
-"font-size: 18px;\n"
-"font-weight: bold;\n"
-"color: #1db954;\n"
-"border: 2px solid #1db954;\n"
-"border-radius: 14px;\n"
-"letter-spacing: 1px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"color: #121212;\n"
-"background-color:     #1db954;\n"
-"border: 2px solid #121212;\n"
-"}")
+        self.start_btn.setStyleSheet(
+            "QPushButton{\n"
+            "font-size: 18px;\n"
+            "font-weight: bold;\n"
+            "color: #1db954;\n"
+            "border: 2px solid #1db954;\n"
+            "border-radius: 14px;\n"
+            "letter-spacing: 1px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "color: #121212;\n"
+            "background-color:     #1db954;\n"
+            "border: 2px solid #121212;\n"
+            "}"
+        )
         self.start_btn.setFlat(False)
         self.start_btn.setObjectName("start_btn")
         self.verticalLayout_5.addWidget(self.start_btn)
@@ -139,7 +147,14 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Spotify gesture controller"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:15pt;\"> SPOTIFY  </span></p><p align=\"center\"><span style=\" font-size:15pt;\"> GESTURE CONTROLLER</span></p></body></html>"))
+        MainWindow.setWindowTitle(
+            _translate("MainWindow", "Spotify gesture controller")
+        )
+        self.label.setText(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p align="center"><span style=" font-size:15pt;"> SPOTIFY  </span></p><p align="center"><span style=" font-size:15pt;"> GESTURE CONTROLLER</span></p></body></html>',
+            )
+        )
         self.start_btn.setText(_translate("MainWindow", "START"))
         self.login_btn.setText(_translate("MainWindow", "Login"))

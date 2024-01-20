@@ -2,14 +2,20 @@
 # WCY19IJ1S1
 
 import os
+
 import requests
+from dotenv import load_dotenv
 from PyQt5.QtCore import QThread, pyqtSignal
 from spotipy.oauth2 import SpotifyOAuth
+
 from constants import SCOPE
+
+load_dotenv()
 
 
 class SpotifyAPI(QThread):
     """The class represents connection with Spotify API."""
+
     def __init__(self, token: str = "") -> None:
         """SpotifyAPI constructor.
 
@@ -17,13 +23,11 @@ class SpotifyAPI(QThread):
             token (str): represents the authorization
         """
         super().__init__()
-        self.client_id = os.getenv('CLIENT_ID')
-        self.client_secret = os.getenv('CLIENT_SECRET')
+        self.client_id = os.getenv("CLIENT_ID")
+        self.client_secret = os.getenv("CLIENT_SECRET")
         self.redirect_uri = "http://localhost:8888/spotify-api/callback/"
         self.token = token
-        self.headers = {
-            "Authorization": f"Bearer {self.token}"
-        }
+        self.headers = {"Authorization": f"Bearer {self.token}"}
 
     change_token = pyqtSignal(str)
     change_msg = pyqtSignal(str)
@@ -32,8 +36,13 @@ class SpotifyAPI(QThread):
         """Function make authorization and set token"""
         self.change_msg.emit("Waiting...")
         try:
-            oauth = SpotifyOAuth(client_id=self.client_id, client_secret=self.client_secret,
-                          redirect_uri=self.redirect_uri, scope=SCOPE, show_dialog=True)
+            oauth = SpotifyOAuth(
+                client_id=self.client_id,
+                client_secret=self.client_secret,
+                redirect_uri=self.redirect_uri,
+                scope=SCOPE,
+                show_dialog=True,
+            )
             self.token = oauth.get_access_token(as_dict=False, check_cache=False)
             self.change_token.emit(self.token)
             self.change_msg.emit("Successful, let's use this app!")
@@ -76,7 +85,7 @@ class SpotifyAPI(QThread):
     def change_playing_status(self) -> None:
         """Function starts play or pauses music based on current status."""
         try:
-            is_playing = self.get_playback_state()['is_playing']
+            is_playing = self.get_playback_state()["is_playing"]
 
             if is_playing:
                 self.pause_playback()
@@ -102,10 +111,10 @@ class SpotifyAPI(QThread):
             print(f"Exception: {e}")
 
     def volume_down(self) -> None:
-        """Function changes current volume <- current_volume - step """
+        """Function changes current volume <- current_volume - step"""
         step = 5
         try:
-            current_volume = self.get_playback_state()['device']['volume_percent']
+            current_volume = self.get_playback_state()["device"]["volume_percent"]
             volume = current_volume - step if current_volume - step > 0 else 0
 
             endpoint = "https://api.spotify.com/v1/me/player/volume?volume_percent="
@@ -114,10 +123,10 @@ class SpotifyAPI(QThread):
             print(f"Exception: {e}")
 
     def volume_up(self) -> None:
-        """Function changes current volume <- current_volume + step """
+        """Function changes current volume <- current_volume + step"""
         step = 5
         try:
-            current_volume = self.get_playback_state()['device']['volume_percent']
+            current_volume = self.get_playback_state()["device"]["volume_percent"]
             volume = current_volume + step if current_volume + step < 100 else 100
 
             endpoint = "https://api.spotify.com/v1/me/player/volume?volume_percent="
@@ -130,7 +139,7 @@ class SpotifyAPI(QThread):
         try:
             items_id = self.saved_tracks_id()
 
-            current_track_id = self.get_playback_state()['item']['id']
+            current_track_id = self.get_playback_state()["item"]["id"]
 
             # choose action - save/remove track from the saved songs
             if current_track_id in items_id:
@@ -145,12 +154,12 @@ class SpotifyAPI(QThread):
         try:
             endpoint = "https://api.spotify.com/v1/me/tracks"
             response = requests.get(f"{endpoint}", headers=self.headers)
-            items = response.json()['items']
+            items = response.json()["items"]
 
             # create list with id of saved tracks
             items_id = []
             for e in items:
-                items_id.append(e['track']['id'])
+                items_id.append(e["track"]["id"])
 
             return items_id
         except Exception as e:

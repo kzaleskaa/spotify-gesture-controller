@@ -1,8 +1,5 @@
-# Katarzyna Zaleska
-# WCY19IJ1S1
-
-from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtGui import QImage, QPixmap, QIcon
+from PyQt5.QtCore import Qt, pyqtSlot
+from PyQt5.QtGui import QIcon, QImage, QPixmap
 from PyQt5.QtWidgets import QDialog
 
 from GestureRecognitionThread import GestureRecognitionThread
@@ -11,6 +8,7 @@ from pyui.DetectionWindow import Ui_DetectionWindow
 
 class DetectionWindow(QDialog, Ui_DetectionWindow):
     """The class represents detection window of GUI."""
+
     def __init__(self):
         """DetectionWindow constructor"""
         super().__init__()
@@ -18,7 +16,7 @@ class DetectionWindow(QDialog, Ui_DetectionWindow):
         self.token = ""
         self._connect_buttons()
         self.detection = GestureRecognitionThread()
-        self.setWindowIcon(QIcon('icons/hand-recognition.png'))
+        self.setWindowIcon(QIcon("icons/hand-recognition.png"))
 
     def _connect_buttons(self) -> None:
         """Function connects button with its action."""
