@@ -1,4 +1,4 @@
-keras==2.15.0
+keras==3.9.0
 mediapipe==0.10.9
 numpy==1.24.3
 opencv_python==4.6.0.66
